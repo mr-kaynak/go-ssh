@@ -4,20 +4,30 @@ Get up and running with go-ssh in 5 minutes!
 
 ## Installation
 
-### Option 1: Homebrew (Recommended for macOS/Linux)
+### macOS/Linux: Homebrew (Recommended)
 
-Once released, install via:
 ```bash
 brew tap mr-kaynak/tap
 brew install go-ssh
 ```
 
-### Option 2: Build from Source
+### Windows: Download Binary
+
+1. Go to [GitHub Releases](https://github.com/mr-kaynak/go-ssh/releases)
+2. Download `go-ssh_windows_amd64.zip` (or `arm64` for ARM)
+3. Extract the ZIP file
+4. Run `go-ssh.exe`
+
+Optional: Add to PATH for easy access from anywhere
+
+### Alternative: Build from Source (All Platforms)
 
 ```bash
 git clone https://github.com/mr-kaynak/go-ssh.git
 cd go-ssh
-make install
+make install  # macOS/Linux
+# OR
+go build -o go-ssh.exe ./cmd/go-ssh  # Windows
 ```
 
 ## First Run

@@ -2,8 +2,11 @@
 
 A minimalist SSH key management tool with an interactive terminal UI.
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![Release](https://img.shields.io/github/v/release/mr-kaynak/go-ssh)](https://github.com/mr-kaynak/go-ssh/releases)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/mr-kaynak/go-ssh/ci.yml?branch=main)](https://github.com/mr-kaynak/go-ssh/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mr-kaynak/go-ssh)](https://goreportcard.com/report/github.com/mr-kaynak/go-ssh)
+[![License](https://img.shields.io/github/license/mr-kaynak/go-ssh)](https://github.com/mr-kaynak/go-ssh/blob/main/LICENSE)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/mr-kaynak/go-ssh)](https://github.com/mr-kaynak/go-ssh/blob/main/go.mod)
 
 ## Features
 
@@ -24,17 +27,46 @@ brew tap mr-kaynak/tap
 brew install go-ssh
 ```
 
-### From Source
+### Windows
 
+#### Option 1: Download Binary (Recommended)
+1. Download the latest Windows binary from [GitHub Releases](https://github.com/mr-kaynak/go-ssh/releases)
+2. Extract the ZIP file
+3. Add the binary to your PATH or run directly from the extracted folder
+
+#### Option 2: Build from Source
+```powershell
+git clone https://github.com/mr-kaynak/go-ssh.git
+cd go-ssh
+go build -o go-ssh.exe ./cmd/go-ssh
+```
+
+#### Option 3: Using Go Install
+```powershell
+go install github.com/mr-kaynak/go-ssh/cmd/go-ssh@latest
+```
+
+### Linux/macOS (Alternative Methods)
+
+#### Download Binary
+Download the latest release from [GitHub Releases](https://github.com/mr-kaynak/go-ssh/releases)
+
+```bash
+# Linux (amd64)
+curl -L https://github.com/mr-kaynak/go-ssh/releases/latest/download/go-ssh_linux_amd64.tar.gz | tar xz
+sudo mv go-ssh /usr/local/bin/
+
+# macOS (arm64)
+curl -L https://github.com/mr-kaynak/go-ssh/releases/latest/download/go-ssh_darwin_arm64.tar.gz | tar xz
+sudo mv go-ssh /usr/local/bin/
+```
+
+#### Build from Source
 ```bash
 git clone https://github.com/mr-kaynak/go-ssh.git
 cd go-ssh
 make install
 ```
-
-### Download Binary
-
-Download the latest release from [GitHub Releases](https://github.com/mr-kaynak/go-ssh/releases).
 
 ## Usage
 
