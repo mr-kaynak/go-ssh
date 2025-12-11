@@ -76,7 +76,7 @@ func CheckAndNotify(currentVersion string) {
 	release, found, err := checker.CheckForUpdate(ctx)
 	if err != nil || !found {
 		state.LastCheck = time.Now()
-		state.Save()
+		_ = state.Save()
 		return
 	}
 
@@ -85,5 +85,5 @@ func CheckAndNotify(currentVersion string) {
 
 	state.LastCheck = time.Now()
 	state.LastVersion = release.Version()
-	state.Save()
+	_ = state.Save()
 }
