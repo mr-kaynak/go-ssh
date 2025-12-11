@@ -22,7 +22,6 @@ type ListView struct {
 	filterText   string
 }
 
-// NewListView creates a new list view
 func NewListView() *ListView {
 	table := tview.NewTable()
 	table.SetBorders(false)

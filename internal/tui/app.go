@@ -33,7 +33,6 @@ type App struct {
 	keys []*ssh.Key
 }
 
-// NewApp creates a new TUI application
 func NewApp(version string) *App {
 	scanner, err := ssh.NewScanner()
 	if err != nil {

@@ -11,7 +11,6 @@ type HelpView struct {
 	onClose func()
 }
 
-// NewHelpView creates a new help view
 func NewHelpView() *HelpView {
 	tv := tview.NewTextView()
 	tv.SetDynamicColors(true)

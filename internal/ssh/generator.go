@@ -22,7 +22,6 @@ type Generator struct {
 	sshDir string
 }
 
-// NewGenerator creates a new SSH key generator
 func NewGenerator() (*Generator, error) {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {

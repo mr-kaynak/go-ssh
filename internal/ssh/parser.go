@@ -14,7 +14,6 @@ import (
 // Parser handles parsing SSH keys
 type Parser struct{}
 
-// NewParser creates a new SSH key parser
 func NewParser() *Parser {
 	return &Parser{}
 }

@@ -22,7 +22,6 @@ type Scanner struct {
 	sshDir string
 }
 
-// NewScanner creates a new SSH key scanner
 func NewScanner() (*Scanner, error) {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {

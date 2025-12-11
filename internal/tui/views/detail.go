@@ -17,7 +17,6 @@ type DetailView struct {
 	onCopy func(*ssh.Key)
 }
 
-// NewDetailView creates a new detail view
 func NewDetailView() *DetailView {
 	tv := tview.NewTextView()
 	tv.SetDynamicColors(true)

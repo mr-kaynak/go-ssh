@@ -15,7 +15,6 @@ type StatusBar struct {
 	messageTime time.Time
 }
 
-// NewStatusBar creates a new status bar
 func NewStatusBar() *StatusBar {
 	tv := tview.NewTextView()
 	tv.SetDynamicColors(true)

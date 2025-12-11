@@ -13,7 +13,6 @@ type CreateView struct {
 	onCancel func()
 }
 
-// NewCreateView creates a new create view
 func NewCreateView() *CreateView {
 	form := tview.NewForm()
 	form.SetButtonsAlign(tview.AlignCenter)
