@@ -12,14 +12,14 @@ import (
 // ListView displays a list of SSH keys
 type ListView struct {
 	*tview.Table
-	keys          []*ssh.Key
-	onSelect      func(*ssh.Key)
-	onCopy        func(*ssh.Key)
-	onNew         func()
-	onHelp        func()
-	onQuit        func()
-	filteredKeys  []*ssh.Key
-	filterText    string
+	keys         []*ssh.Key
+	onSelect     func(*ssh.Key)
+	onCopy       func(*ssh.Key)
+	onNew        func()
+	onHelp       func()
+	onQuit       func()
+	filteredKeys []*ssh.Key
+	filterText   string
 }
 
 // NewListView creates a new list view
@@ -58,53 +58,79 @@ func (lv *ListView) setupHeader() {
 
 // setupInputCapture sets up keyboard shortcuts
 func (lv *ListView) setupInputCapture() {
-	lv.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		switch event.Rune() {
-		case 'q':
-			if lv.onQuit != nil {
-				lv.onQuit()
-			}
-			return nil
-		case 'c', 'y':
-			if lv.onCopy != nil {
-				key := lv.getSelectedKey()
-				if key != nil {
-					lv.onCopy(key)
-				}
-			}
-			return nil
-		case 'n':
-			if lv.onNew != nil {
-				lv.onNew()
-			}
-			return nil
-		case '?':
-			if lv.onHelp != nil {
-				lv.onHelp()
-			}
-			return nil
-		case 'j':
-			return tcell.NewEventKey(tcell.KeyDown, 0, tcell.ModNone)
-		case 'k':
-			return tcell.NewEventKey(tcell.KeyUp, 0, tcell.ModNone)
-		case '/':
-			// TODO: Implement search/filter
-			return nil
-		}
+	lv.SetInputCapture(lv.handleKeyEvent)
+}
 
-		switch event.Key() {
-		case tcell.KeyEnter:
-			if lv.onSelect != nil {
-				key := lv.getSelectedKey()
-				if key != nil {
-					lv.onSelect(key)
-				}
-			}
-			return nil
+// handleKeyEvent handles keyboard events
+func (lv *ListView) handleKeyEvent(event *tcell.EventKey) *tcell.EventKey {
+	// Handle rune-based keys
+	if event.Key() == tcell.KeyRune {
+		if result := lv.handleRuneKey(event.Rune()); result != nil {
+			return result
 		}
+		return nil
+	}
 
-		return event
-	})
+	// Handle special keys
+	if result := lv.handleSpecialKey(event.Key()); result != nil {
+		return result
+	}
+
+	// Return original event if not handled
+	return event
+}
+
+// handleRuneKey handles character key presses
+func (lv *ListView) handleRuneKey(r rune) *tcell.EventKey {
+	switch r {
+	case 'q':
+		if lv.onQuit != nil {
+			lv.onQuit()
+		}
+	case 'c', 'y':
+		lv.handleCopyKey()
+	case 'n':
+		if lv.onNew != nil {
+			lv.onNew()
+		}
+	case '?':
+		if lv.onHelp != nil {
+			lv.onHelp()
+		}
+	case 'j':
+		return tcell.NewEventKey(tcell.KeyDown, 0, tcell.ModNone)
+	case 'k':
+		return tcell.NewEventKey(tcell.KeyUp, 0, tcell.ModNone)
+	case '/':
+		// TODO: Implement search/filter
+	default:
+		return nil // Signal not handled
+	}
+	return tcell.NewEventKey(tcell.KeyRune, 0, tcell.ModNone) // Signal handled
+}
+
+// handleSpecialKey handles special key presses
+func (lv *ListView) handleSpecialKey(key tcell.Key) *tcell.EventKey {
+	if key == tcell.KeyEnter {
+		if lv.onSelect != nil {
+			selectedKey := lv.getSelectedKey()
+			if selectedKey != nil {
+				lv.onSelect(selectedKey)
+			}
+		}
+		return tcell.NewEventKey(tcell.KeyEnter, 0, tcell.ModNone) // Signal handled
+	}
+	return nil // Signal not handled
+}
+
+// handleCopyKey handles copy action
+func (lv *ListView) handleCopyKey() {
+	if lv.onCopy != nil {
+		key := lv.getSelectedKey()
+		if key != nil {
+			lv.onCopy(key)
+		}
+	}
 }
 
 // SetKeys updates the list with new keys
