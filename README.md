@@ -46,6 +46,18 @@ go build -o go-ssh.exe ./cmd/go-ssh
 go install github.com/mr-kaynak/go-ssh/cmd/go-ssh@latest
 ```
 
+### Linux/macOS - Quick Install Script
+
+One-line installation (requires Go):
+```bash
+curl -sSL https://raw.githubusercontent.com/mr-kaynak/go-ssh/main/install.sh | bash
+```
+
+This script will:
+- Install go-ssh via `go install`
+- Automatically add Go bin directory to your PATH
+- Works with bash, zsh, and other shells
+
 ### Linux/macOS (Alternative Methods)
 
 #### Download Binary
